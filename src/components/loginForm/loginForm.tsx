@@ -1,48 +1,42 @@
-import styled from "styled-components";
+import { ChangeEvent, useState } from "react";
+import { FormWrapper, FormInputWrapper, Title } from "./loginForm.style";
 import Button from "../button/button";
 import FormInput from "../formInput/formInput";
-
-const FormWrapper = styled.div`
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  width: 31rem;
-  height: 20rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
-  text-align: center;
-  border-radius: 1rem;
-  &:hover {
-    // 3box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-`;
-const Title = styled.span`
-  color: #c7d710;
-  font-size: 2.4rem;
-  font-weight: bold;
-  margin-bottom: 0.7rem;
-`;
-
-const FormInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  padding-bottom: 1rem;
-`;
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/action/user";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleInputChange =
+    (type: String) => (e: ChangeEvent<HTMLInputElement>) => {
+      if (type === "password") setPassword(e.target.value);
+      else if (type === "email") setEmail(e.target.value);
+    };
   return (
     <FormWrapper>
       <Title>PeopleBook</Title>
       <FormInputWrapper>
-        <FormInput inputType="text" placeholder="Email" parent="login" />
-        <FormInput inputType="password" placeholder="Password" parent="login" />
+        <FormInput
+          inputType="text"
+          placeholder="Email"
+          parent="login"
+          onChange={handleInputChange("email")}
+        />
+        <FormInput
+          inputType="password"
+          placeholder="Password"
+          parent="login"
+          onChange={handleInputChange("password")}
+        />
       </FormInputWrapper>
-
-      <Button actionName="Login" handleClick={() => console.log("fsfs")} />
+      <Button
+        actionName="Login"
+        handleClick={() => dispatch(login({ email, password }))}
+      />
     </FormWrapper>
   );
 };

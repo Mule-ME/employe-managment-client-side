@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import { ChangeEvent } from "react";
+import { Select } from "./selector.style";
 type SelectProps = {
   placeholder: string;
-  onChange?: () => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
 };
 
@@ -17,17 +18,6 @@ const values = [
 ];
 
 const Selector = ({ placeholder, onChange, required }: SelectProps) => {
-  const Select = styled.select`
-    width: 16rem;
-    height: 2rem;
-    color:  #c7d710};
-    border: 1px solid #606060;
-    font-size: 1.2rem;
-    text-align: left;
-    border-radius: 20px;
-    padding-left: 15px;
-  `;
-
   return (
     <Select name="gender" id="gender" required>
       <option value={placeholder}>{placeholder}</option>

@@ -1,58 +1,69 @@
+import { useState } from "react";
 import styled from "styled-components";
 import IconButton from "../button/iconButton";
-
-const Container = styled.div`
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 22.5rem;
-  height: 11.25rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 0.7rem;
-  &:hover {
-    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const Label = styled.span`
-  font-size: 1.2rem;
-  font-weight: light;
-  color: #606060;
-`;
-const Value = styled.span`
-  font-size: 1.2rem;
-  font-weight: light;
-  color: #c7d710;
-`;
-const LabelWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  padding-left: 1.5rem;
-`;
-const ValueWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-`;
-const ActionButtonsWrapper = styled.div`
-  display: flex;
-  gap: 0.3rem;
-  padding-top: 7rem;
-  margin-right: 0.5rem;
-`;
+import EditEmployeeForm from "../modal/editEmployee/editEmployee";
+import DeleteEmployeeForm from "../modal/deleteEmployee/deleteEmployee";
+import {
+  ActionButtonsWrapper,
+  Container,
+  Label,
+  LabelWrapper,
+  Value,
+  ValueWrapper,
+} from "./card.style";
+type CardProps = {
+  handleClick: () => void;
+};
 
 const Card = () => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+
+  const ModalOverlay = styled.div`
+    display: ${showDeleteModal === true
+      ? "block"
+      : showUpdateModal === true
+      ? "block"
+      : "none"};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 5;
+  `;
+
+  const deleteModalHandler = () => {
+    setShowDeleteModal(true);
+  };
+  const updateModalHandler = () => {
+    setShowUpdateModal(true);
+  };
+
+  const labels = [
+    { id: 1, value: "Name" },
+    { id: 2, value: "Email" },
+    { id: 3, value: "Gender" },
+    { id: 4, value: "Salary" },
+    { id: 5, value: "DoB" },
+  ];
   return (
     <Container>
+      <EditEmployeeForm show={showUpdateModal} />
+      <DeleteEmployeeForm show={showDeleteModal} />
+      <ModalOverlay
+        onClick={(e) =>
+          showDeleteModal === true
+            ? setShowDeleteModal(false)
+            : setShowUpdateModal(false)
+        }
+      />
       <LabelWrapper>
-        <Label>Name</Label>
-        <Label>Email</Label>
-        <Label>Gender</Label>
-        <Label>Salary</Label>
-        <Label>DoB</Label>
+        {labels?.map((label) => (
+          <Label key={label?.id}>{label.value}</Label>
+        ))}
       </LabelWrapper>
       <ValueWrapper>
         <Value>Mulualem Eshetu</Value>
@@ -62,8 +73,8 @@ const Card = () => {
         <Value>15-12-1990</Value>
       </ValueWrapper>
       <ActionButtonsWrapper>
-        <IconButton actionName="update" />
-        <IconButton actionName="delate" />
+        <IconButton actionName="update" handleClick={updateModalHandler} />
+        <IconButton actionName="delete" handleClick={deleteModalHandler} />
       </ActionButtonsWrapper>
     </Container>
   );
