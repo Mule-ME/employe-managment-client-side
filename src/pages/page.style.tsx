@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
 `;
 
 export const HomeDisplay = styled.div`
+  postilion: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,6 +31,8 @@ export const ActionsWrapper = styled.div`
 `;
 
 export const PaginationContainer = styled.div`
+  position: absolute;
+  top: 80%;
   display: flex;
   justify-content: flex-end;
   gap: 1rem;

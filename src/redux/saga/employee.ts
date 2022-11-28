@@ -22,22 +22,30 @@ import * as Effects from "redux-saga/effects";
 import { GetEmployeePayload } from "../../types";
 import { gotEmployee } from "../action/employee";
 import { GET_EMPLOYEES } from "../actionType/employee";
+import { Console } from "console";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
 const headers = {
   accept: "Application/json",
-  Authorization: `Bearer ${localStorage.getItem("token")}`,
+  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
 };
 
-export function* getEmployees(query: GetEmployeePayload) {
+export function* getEmployees(GetEmployeePayload: any) {
+  const query = {
+    page: GetEmployeePayload?.payload?.page,
+    limit: GetEmployeePayload?.payload?.limit,
+    search: GetEmployeePayload?.payload?.search,
+  };
   try {
     const response: GetEmployeeResponse = yield axios.get<Employee>(
-      `${baseUrl}/user`,
+      `${baseUrl}/employee`,
       {
         method: "GET",
         params: {
-          query,
+          page: query?.page,
+          limit: query?.limit,
+          search: query?.search,
         },
         headers,
       }
@@ -48,21 +56,35 @@ export function* getEmployees(query: GetEmployeePayload) {
   }
 }
 
-export function* addEmployee(employee: Employee) {
+export function* addEmployee(Employee: any) {
+  const data = {
+    ...Employee?.payload,
+    dateOfBirth: new Date(
+      Employee?.payload?.dateOfBirth?.getFullYear() -
+        Employee?.payload?.dateOfBirth?.getMonth() -
+        Employee?.payload?.dateOfBirth?.getDate()
+    ),
+    gender: "Male",
+  };
   try {
     const response: AddEmployeeResponse = yield axios.post<AddEmployeeResponse>(
-      `${baseUrl}/user`,
+      `${baseUrl}/employee/create`,
+      data,
       {
         method: "GET",
-        params: {
-          body: employee,
-        },
         headers,
       }
     );
     yield put(employeeAdded(response));
+    console.log(localStorage.getItem("accessToken"));
+    console.log(response);
+    console.log(Employee?.payload);
+    console.log(data);
   } catch (e) {
     yield put(employeeAdded({ success: false }));
+    console.log(e);
+    console.log(Employee?.payload);
+    console.log(data);
   }
 }
 
@@ -70,7 +92,7 @@ export function* updateEmployee(employee: Employee) {
   try {
     const response: UpdateEmployeeResponse =
       yield axios.patch<UpdateEmployeeResponse>(
-        `${baseUrl}/user/${employee._id}`,
+        `${baseUrl}/employee/update/${employee._id}`,
         {
           method: "PATCH",
           params: {
@@ -89,7 +111,7 @@ export function* deleteEmployee(employee: Employee) {
   try {
     const response: DeleteEmployeeResponse =
       yield axios.delete<DeleteEmployeeResponse>(
-        `${baseUrl}/user/${employee._id}}`,
+        `${baseUrl}/employee/delete/${employee._id}}`,
         {
           method: "DELETE",
           params: {

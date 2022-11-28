@@ -1,19 +1,21 @@
-import React from "react";
-import "./App.css";
-import AddEmployeeForm from "./components/modal/addEmployee/addEmployee";
-import IconButton from "./components/button/iconButton";
-import Card from "./components/card/card";
-import CardContainer from "./components/cardContainer/cardContainer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RequireAuth from "./helpers/auth/requireAuth";
+import RequireGust from "./helpers/auth/requireGust";
 import Home from "./pages/home";
 import LoginPage from "./pages/loginPage";
 
 function App() {
   return (
-    <div>
-      <Home />
-      {/* <LoginPage /> */}
-      {/* <CardContainer/> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<RequireAuth />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route element={<RequireGust />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

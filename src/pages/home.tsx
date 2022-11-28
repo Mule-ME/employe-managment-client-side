@@ -20,28 +20,28 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  console.log(employee);
+  // console.log(employee);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       getEmployees({
         page,
-        limit: 6,
-        //  search:""
+        limit: 2,
+        search: "",
       })
     );
   }, [page]);
 
-  useEffect(() => {
-    dispatch(
-      getEmployees({
-        page: 1,
-        limit: 6,
-        search,
-      })
-    );
-  }, [search]);
+  // useEffect(() => {
+  //   dispatch(
+  //     getEmployees({
+  //       page: 1,
+  //       limit: 6,
+  //       search,
+  //     })
+  //   );
+  // }, [search]);
 
   const [showAddModal, setShowAddModal] = useState(false);
 
@@ -73,7 +73,9 @@ const Home = () => {
         />
         <Button actionName="Add New" handleClick={() => addModalHandler()} />
       </ActionsWrapper>
-      {/* <CardContainer employee={employee} /> */}
+      <CardContainer
+      // employee={employee} s
+      />
       <PaginationContainer>
         <PaginationButton actionName="left" />
         <PaginationButton actionName="right" />

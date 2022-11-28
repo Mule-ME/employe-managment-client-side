@@ -34,7 +34,7 @@ export const Title = styled.span<{
 
 `;
 
-export const FormInputWrapper = styled.div`
+export const FormInputWrapper = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -42,10 +42,14 @@ export type LoginPayload = {
 };
 
 export type LoginResponse = {
-  email?: string;
-  name?: string;
-  _id?: string;
-  token?: string;
+  data?: {
+    data?: {
+      email?: string;
+      name?: string;
+      _id?: string;
+    };
+    accessToken?: any;
+  };
   success: boolean;
 };
 

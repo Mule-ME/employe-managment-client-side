@@ -29,6 +29,7 @@ export const userReducer = (
           ...state,
           loggingUser: false,
           user: action.payload.response,
+          // localStorage.setItem("accessToken", response?.data?.data?.token);
         };
       else return { ...state, loggingUser: false };
     default:

@@ -24,6 +24,7 @@ const AddEmployeeForm = ({
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(undefined);
   const [salary, setSalary] = useState<number | undefined>(undefined);
+  console.log(gender);
 
   const dispatch = useDispatch();
 
@@ -37,9 +38,7 @@ const AddEmployeeForm = ({
         case "email":
           setEmail(value);
           break;
-        case "gender":
-          setGender(value);
-          break;
+
         case "dob":
           setDateOfBirth(new Date(Date.parse(value)));
           break;
@@ -48,6 +47,15 @@ const AddEmployeeForm = ({
           break;
       }
     };
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    setGender(value);
+  };
+
+  // const handleSubmit = (e:any) => {
+  //   e.preventDefault();
+  // };
+
   return (
     <FormWrapper show={show}>
       <Title>Add Employee</Title>
@@ -68,7 +76,7 @@ const AddEmployeeForm = ({
         />
         <Selector
           placeholder="Gender"
-          onChange={handleInputChange("gender")}
+          onChange={handleSelectChange}
           required={true}
         />
         <FormInput
@@ -104,6 +112,7 @@ const AddEmployeeForm = ({
             );
             setShowAddModal(false);
           }}
+          type="submit"
         />
       </ActionWrapper>
     </FormWrapper>

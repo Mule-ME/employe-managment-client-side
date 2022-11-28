@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import { Select } from "./selector.style";
 type SelectProps = {
   placeholder: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
   required?: boolean;
 };
 
@@ -19,7 +19,7 @@ const values = [
 
 const Selector = ({ placeholder, onChange, required }: SelectProps) => {
   return (
-    <Select name="gender" id="gender" required>
+    <Select name="gender" id="gender" required={required} onChange={onChange}>
       <option value={placeholder}>{placeholder}</option>
       {values.map((gender) => (
         <option key={gender.id} value={gender.value}>

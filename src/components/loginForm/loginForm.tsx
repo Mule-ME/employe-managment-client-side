@@ -11,6 +11,8 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  console.log(email, password);
+
   const handleInputChange =
     (type: String) => (e: ChangeEvent<HTMLInputElement>) => {
       if (type === "password") setPassword(e.target.value);
