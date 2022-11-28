@@ -4,6 +4,7 @@ type SelectProps = {
   placeholder: string;
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
   required?: boolean;
+  defaultValue?: string;
 };
 
 const values = [
@@ -17,9 +18,20 @@ const values = [
   },
 ];
 
-const Selector = ({ placeholder, onChange, required }: SelectProps) => {
+const Selector = ({
+  placeholder,
+  onChange,
+  required,
+  defaultValue,
+}: SelectProps) => {
   return (
-    <Select name="gender" id="gender" required={required} onChange={onChange}>
+    <Select
+      name="gender"
+      id="gender"
+      required={required}
+      onChange={onChange}
+      defaultValue={defaultValue}
+    >
       <option value={placeholder}>{placeholder}</option>
       {values.map((gender) => (
         <option key={gender.id} value={gender.value}>

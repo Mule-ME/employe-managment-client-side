@@ -15,18 +15,19 @@ export interface Action {
   payload: any;
 }
 
-export interface State {
+export interface AppState {
   employee: {
     data: Employee[];
     total?: number;
   };
+
   addingEmployee: boolean;
   gettingEmployee: boolean;
   updatingEmployee: boolean;
   deletingEmployee: boolean;
 }
 
-const initialState: State = {
+const initialState: AppState = {
   employee: {
     data: [],
     total: 0,
@@ -37,19 +38,21 @@ const initialState: State = {
   deletingEmployee: false,
 };
 
-export const employeeReducer = (
-  state: State = initialState,
+export function employeeReducer(
+  state: AppState = initialState,
   action: Action
-): State => {
+): AppState {
+  console.log({ state, action }, "response only for this");
+
   switch (action.type) {
     case GET_EMPLOYEES:
       return { ...state, gettingEmployee: true };
     case GOT_EMPLOYEES:
-      if (action.payload.success)
+      if (action.payload?.success)
         return {
           ...state,
           gettingEmployee: false,
-          employee: action.payload.response,
+          employee: { data: action.payload.data, total: action.payload.total },
         };
       else return { ...state, gettingEmployee: false };
     case ADD_EMPLOYEE:
@@ -60,8 +63,8 @@ export const employeeReducer = (
           ...state,
           addingEmployee: false,
           employee: {
-            data: state.employee.data,
-            total: state.employee.total || 0 + 1,
+            data: [...state.employee.data, action.payload.data],
+            total: (state.employee.total || 0) + 1,
           },
         };
       else return { ...state, addingEmployee: false };
@@ -84,16 +87,15 @@ export const employeeReducer = (
     case DELETE_EMPLOYEE:
       return { ...state, deletingEmployee: true };
     case EMPLOYEE_DELETED:
+      console.log(action.payload, "action.payload");
       if (action.payload.success)
         return {
           ...state,
           deletingEmployee: false,
           employee: {
-            data: state.employee.data?.filter((employee) => {
-              if (employee._id !== action.payload._id)
-                return action.payload.employee;
-              return employee;
-            }),
+            data: state.employee.data?.filter(
+              (employee) => employee._id !== action.payload?._id
+            ),
             total: state.employee.total ?? -1,
           },
         };
@@ -101,4 +103,4 @@ export const employeeReducer = (
     default:
       return state;
   }
-};
+}

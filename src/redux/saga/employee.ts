@@ -18,11 +18,7 @@ import {
 
 import { put } from "@redux-saga/core/effects";
 import axios from "axios";
-import * as Effects from "redux-saga/effects";
-import { GetEmployeePayload } from "../../types";
 import { gotEmployee } from "../action/employee";
-import { GET_EMPLOYEES } from "../actionType/employee";
-import { Console } from "console";
 
 const baseUrl = "http://localhost:5000/api/v1";
 
@@ -38,7 +34,7 @@ export function* getEmployees(GetEmployeePayload: any) {
     search: GetEmployeePayload?.payload?.search,
   };
   try {
-    const response: GetEmployeeResponse = yield axios.get<Employee>(
+    const { data } = yield axios.get<GetEmployeeResponse>(
       `${baseUrl}/employee`,
       {
         method: "GET",
@@ -50,78 +46,58 @@ export function* getEmployees(GetEmployeePayload: any) {
         headers,
       }
     );
-    yield put(gotEmployee(response));
+    yield put(gotEmployee(data));
+    console.log(data, "this is the response");
   } catch (e) {
     yield put(gotEmployee({ success: false }));
   }
 }
-
-export function* addEmployee(Employee: any) {
-  const data = {
-    ...Employee?.payload,
-    dateOfBirth: new Date(
-      Employee?.payload?.dateOfBirth?.getFullYear() -
-        Employee?.payload?.dateOfBirth?.getMonth() -
-        Employee?.payload?.dateOfBirth?.getDate()
-    ),
-    gender: "Male",
-  };
+export function* addEmployee({ employee }: any) {
   try {
-    const response: AddEmployeeResponse = yield axios.post<AddEmployeeResponse>(
+    const { data } = yield axios.post<AddEmployeeResponse>(
       `${baseUrl}/employee/create`,
-      data,
+      employee,
       {
-        method: "GET",
+        method: "POST",
         headers,
       }
     );
-    yield put(employeeAdded(response));
-    console.log(localStorage.getItem("accessToken"));
-    console.log(response);
-    console.log(Employee?.payload);
-    console.log(data);
+    yield put(employeeAdded(data));
+    console.log(data, "this is the response");
   } catch (e) {
     yield put(employeeAdded({ success: false }));
-    console.log(e);
-    console.log(Employee?.payload);
-    console.log(data);
+    console.log(e, "this is the response");
   }
 }
 
-export function* updateEmployee(employee: Employee) {
+export function* updateEmployee({ employee }: any) {
   try {
-    const response: UpdateEmployeeResponse =
-      yield axios.patch<UpdateEmployeeResponse>(
-        `${baseUrl}/employee/update/${employee._id}`,
-        {
-          method: "PATCH",
-          params: {
-            body: employee,
-          },
-          headers,
-        }
-      );
-    yield put(updatedEmployee(response));
+    const { data } = yield axios.patch<UpdateEmployeeResponse>(
+      `${baseUrl}/employee/update/${employee._id}`,
+      {
+        method: "PATCH",
+        headers,
+      }
+    );
+    yield put(updatedEmployee(data));
   } catch (e) {
     yield put(updatedEmployee({ success: false }));
+    console.log(headers, "headers");
   }
 }
 
-export function* deleteEmployee(employee: Employee) {
+export function* deleteEmployee({ employee }: any) {
   try {
-    const response: DeleteEmployeeResponse =
-      yield axios.delete<DeleteEmployeeResponse>(
-        `${baseUrl}/employee/delete/${employee._id}}`,
-        {
-          method: "DELETE",
-          params: {
-            body: employee,
-          },
-          headers,
-        }
-      );
-    yield put(deletedEmployee(response));
+    yield axios.delete<DeleteEmployeeResponse>(
+      `${baseUrl}/employee/delete/${employee._id}}`,
+      {
+        method: "DELETE",
+        headers,
+      }
+    );
+    yield put(deletedEmployee({ ...employee, success: true }));
   } catch (e) {
+    console.log({ e });
     yield put(deletedEmployee({ success: false }));
   }
 }

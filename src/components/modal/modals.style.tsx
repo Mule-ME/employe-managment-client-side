@@ -21,10 +21,7 @@ export const FormWrapper = styled.div<{
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
 `;
-export const Title = styled.span<{
-  isDeleteModal?: boolean;
-}>`
-  color: #c7d710;
+export const Title = styled.span<{ isDeleteModal?: boolean }>`
   color:${(props) => (props?.isDeleteModal === true ? "#ff5252" : "#c7d710")}
   font-size: ${(props) => (props?.isDeleteModal === true ? "1.2rem" : "1.4rem")}
   font-weight: bold;

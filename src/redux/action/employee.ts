@@ -1,6 +1,10 @@
 import {
   DeleteEmployeeResponse,
   UpdateEmployeeResponse,
+  GetEmployeeResponse,
+  AddEmployeeResponse,
+  Employee,
+  GetEmployeePayload,
 } from "./../../types/index";
 import {
   ADD_EMPLOYEE,
@@ -12,16 +16,10 @@ import {
   DELETE_EMPLOYEE,
   EMPLOYEE_DELETED,
 } from "../actionType/employee";
-import {
-  AddEmployeeResponse,
-  Employee,
-  GetEmployeePayload,
-  GetEmployeeResponse,
-} from "../../types";
 
 export const addEmployee = (employee: Employee) => ({
   type: ADD_EMPLOYEE,
-  payload: employee,
+  employee,
 });
 
 export const employeeAdded = (response: AddEmployeeResponse) => ({
@@ -41,7 +39,7 @@ export const gotEmployee = (response: GetEmployeeResponse) => ({
 
 export const updateEmployee = (employee: Employee) => ({
   type: UPDATE_EMPLOYEE,
-  payload: employee,
+  employee,
 });
 
 export const updatedEmployee = (response: UpdateEmployeeResponse) => ({
@@ -51,7 +49,7 @@ export const updatedEmployee = (response: UpdateEmployeeResponse) => ({
 
 export const deleteEmployee = (employee: Employee) => ({
   type: DELETE_EMPLOYEE,
-  payload: employee,
+  employee,
 });
 
 export const deletedEmployee = (response: DeleteEmployeeResponse) => ({

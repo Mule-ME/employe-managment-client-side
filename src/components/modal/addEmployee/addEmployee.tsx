@@ -24,8 +24,6 @@ const AddEmployeeForm = ({
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(undefined);
   const [salary, setSalary] = useState<number | undefined>(undefined);
-  console.log(gender);
-
   const dispatch = useDispatch();
 
   const handleInputChange =
@@ -112,7 +110,7 @@ const AddEmployeeForm = ({
             );
             setShowAddModal(false);
           }}
-          type="submit"
+          // type="submit"
         />
       </ActionWrapper>
     </FormWrapper>

@@ -1,3 +1,6 @@
-import { State } from "../reducer/employee";
+import { AppState } from "../reducer/employee";
 
-export const employeeSelector = (State: any) => State.employee?.employee?.data;
+const employeeSelector = (state: any) => state?.employee;
+
+export const employeeListSelector = (state: AppState) =>
+  employeeSelector(state)?.employee?.data;

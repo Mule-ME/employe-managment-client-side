@@ -3,6 +3,7 @@ import styled from "styled-components";
 import IconButton from "../button/iconButton";
 import EditEmployeeForm from "../modal/editEmployee/editEmployee";
 import DeleteEmployeeForm from "../modal/deleteEmployee/deleteEmployee";
+import { Employee } from "../../types";
 import {
   ActionButtonsWrapper,
   Container,
@@ -12,10 +13,12 @@ import {
   ValueWrapper,
 } from "./card.style";
 type CardProps = {
-  handleClick: () => void;
+  employee: Employee;
 };
 
-const Card = () => {
+const Card = (props: CardProps) => {
+  const { name, email, _id, gender, salary, dateOfBirth } = props.employee;
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -51,8 +54,16 @@ const Card = () => {
   ];
   return (
     <Container>
-      <EditEmployeeForm show={showUpdateModal} />
-      <DeleteEmployeeForm show={showDeleteModal} />
+      <EditEmployeeForm
+        show={showUpdateModal}
+        setShowUpdateModal={setShowDeleteModal}
+        employee={props.employee}
+      />
+      <DeleteEmployeeForm
+        show={showDeleteModal}
+        setShowDeleteModal={setShowDeleteModal}
+        employee={props.employee}
+      />
       <ModalOverlay
         onClick={(e) =>
           showDeleteModal === true
@@ -66,11 +77,11 @@ const Card = () => {
         ))}
       </LabelWrapper>
       <ValueWrapper>
-        <Value>Mulualem Eshetu</Value>
-        <Value>info@mulualem.com</Value>
-        <Value>Male</Value>
-        <Value>21,533</Value>
-        <Value>15-12-1990</Value>
+        <Value>{name}</Value>
+        <Value>{email}</Value>
+        <Value>{gender}</Value>
+        <Value>{salary}</Value>
+        <Value>{dateOfBirth?.toString().substring(0, 10)}</Value>
       </ValueWrapper>
       <ActionButtonsWrapper>
         <IconButton actionName="update" handleClick={updateModalHandler} />

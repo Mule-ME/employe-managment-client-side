@@ -1,17 +1,17 @@
 import { ListContainer } from "./cardContainer.styles";
+import { Employee } from "../../types";
 import Card from "../card/card";
 
-type CardContainerProps = {};
+type CardContainerProps = {
+  employees?: Employee[];
+};
 
-const CardContainer = () => {
+const CardContainer = (props: CardContainerProps) => {
   return (
     <ListContainer>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {props.employees?.map((employee) => (
+        <Card employee={employee} />
+      ))}
     </ListContainer>
   );
 };

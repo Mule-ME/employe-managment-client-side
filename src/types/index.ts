@@ -1,5 +1,3 @@
-import { Location } from "react-router-dom";
-
 export type Employee = {
   _id?: string;
   name?: string;
@@ -43,14 +41,12 @@ export type LoginPayload = {
 
 export type LoginResponse = {
   data?: {
-    data?: {
-      email?: string;
-      name?: string;
-      _id?: string;
-    };
-    accessToken?: any;
+    email?: string;
+    name?: string;
+    _id?: string;
   };
-  success: boolean;
+  accessToken?: string;
+  success?: boolean;
 };
 
 export type User = {

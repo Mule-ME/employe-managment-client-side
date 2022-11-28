@@ -8,22 +8,21 @@ const baseUrl = "http://localhost:5000/api/v1";
 const headers = {
   accept: "Application/json",
   "Content-Type": "application/json",
-  // Authorization: `Bearer ${localStorage.getItem("token")}`,
 };
 
 export function* loginUser({ email, password }: LoginPayload) {
   try {
-    const data = { email, password };
-    const response: LoginResponse = yield axios.post<LoginResponse>(
+    const requestData = { email, password };
+    const { data } = yield axios.post<LoginResponse>(
       `${baseUrl}/admin/login`,
-      data,
+      requestData,
       {
         method: "POST",
         headers,
       }
     );
-    yield put(userLogged(response));
-    const token = response?.data?.accessToken;
+    yield put(userLogged(data));
+    const token = data?.accessToken;
     localStorage.setItem("accessToken", token);
     window.location.replace("/");
   } catch (e) {

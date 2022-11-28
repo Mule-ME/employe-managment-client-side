@@ -1,18 +1,38 @@
 import { ActionWrapper, FormWrapper, Title } from "../modals.style";
 import Button from "../../button/button";
+import { Employee } from "../../../types";
+import { useDispatch } from "react-redux";
+import { deleteEmployee } from "../../../redux/action/employee";
 
-type EditEmployeeFormProps = {
+type DeleteEmployeeFormProps = {
   show: boolean;
-  // handleClick?: () => void;
+  setShowDeleteModal: (show: boolean) => void;
+  employee: Employee;
 };
 
-const DeleteEmployeeForm = ({ show = false }: EditEmployeeFormProps) => {
+const DeleteEmployeeForm = ({
+  show = false,
+  employee,
+  setShowDeleteModal,
+}: DeleteEmployeeFormProps) => {
+  const dispatch = useDispatch();
+
   return (
     <FormWrapper show={show} isDeleteModal={true}>
-      <Title isDeleteModal={true}>Are you sure ?</Title>
+      <Title isDeleteModal={true}>Are you sure to Delete ?</Title>
       <ActionWrapper>
-        <Button actionName="Cancel" />
-        <Button actionName="Delete" />
+        <Button
+          actionName="Cancel"
+          handleClick={() => setShowDeleteModal(false)}
+        />
+        <Button
+          actionName="Delete"
+          handleClick={() => {
+            dispatch(deleteEmployee(employee));
+            setShowDeleteModal(false);
+          }}
+          // type="submit"
+        />
       </ActionWrapper>
     </FormWrapper>
   );
