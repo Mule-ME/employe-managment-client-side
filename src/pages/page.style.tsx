@@ -27,7 +27,7 @@ export const HomeDisplay = styled.div`
 export const ActionsWrapper = styled.div`
   display: flex;
   gap: 1rem;
-  margin: 0 0 1rem 49rem;
+  margin: 0 0 1rem 53.5rem;
 `;
 
 export const PaginationContainer = styled.div`
@@ -45,7 +45,6 @@ export const ModalOverlay = styled.div<{
   showDeleteModal?: boolean;
 }>`
   display: ${(props) => (props.showModal === true ? "block" : "none")};
-
   position: absolute;
   top: 0;
   left: 0;
@@ -54,4 +53,24 @@ export const ModalOverlay = styled.div<{
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   z-index: 5;
+`;
+export const AccountButton = styled.button`
+  position: absolute;
+  top: 1%;
+  left: 86.3%;
+  justify-content: flex-end;
+  display: flex;
+  justify-content: center;
+  background-color: #ffff;
+  border: 1px solid #2174c9;
+  color: #2174c9;
+  height: 1.6rem;
+  width: 7rem;
+  font-size: 1.2rem;
+  font-weight: light;
+  border-radius: 0.5rem;
+  &:hover {
+    background-color: #ececec;
+  }
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 `;

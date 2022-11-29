@@ -76,9 +76,9 @@ export function employeeReducer(
           ...state,
           updatingEmployee: false,
           employee: {
-            data: state.employee.data?.map((employee) => {
-              if (employee._id === action.payload.employee?._id)
-                return action.payload.employee;
+            data: state.employee?.data?.map((employee) => {
+              if (employee?._id === action.payload?.data?._id)
+                return action.payload.data;
               return employee;
             }),
           },

@@ -7,20 +7,38 @@ import {
   HomeDisplay,
   PaginationContainer,
   ModalOverlay,
+  AccountButton,
 } from "./page.style";
 import AddEmployeeForm from "../components/modal/addEmployee/addEmployee";
 import Button from "../components/button/button";
 import CardContainer from "../components/cardContainer/cardContainer";
 import FormInput from "../components/formInput/formInput";
 import PaginationButton from "../components/paginationButton/paginationButton";
+import LogoutCard from "../components/logout/logoutCard";
 
 const Home = () => {
   const employee = useSelector(employeeListSelector);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showAccount, setShowAccount] = useState(false);
+  const [clickCounter, setClickCounter] = useState(1);
 
-  console.log(employee, "this is the response134");
+  const addModalHandler = () => {
+    setShowAddModal(true);
+  };
 
+  const accountModalHandler = () => {
+    setClickCounter(clickCounter + 1);
+    if (clickCounter === 1) {
+      setShowAccount(true);
+      setClickCounter(clickCounter - 1);
+    } else {
+      setShowAccount(false);
+    }
+  };
+
+  //Requesting users list with out search
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
@@ -32,6 +50,7 @@ const Home = () => {
     );
   }, [page]);
 
+  //Requesting users list with search
   useEffect(() => {
     dispatch(
       getEmployees({
@@ -42,33 +61,21 @@ const Home = () => {
     );
   }, [search]);
 
-  const [showAddModal, setShowAddModal] = useState(false);
-
-  const addModalHandler = () => {
-    setShowAddModal(true);
-  };
-
   const handlePageIncrement = () => {
     setPage(page + 1);
   };
   const handlePageDecrement = () => {
     setPage(page - 1);
   };
-  //   const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-
-  //   const button: HTMLButtonElement = event.currentTarget;
-  //   setClickedButton(button.name);
-  // };
-
   const handleSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearch(value);
   };
   return (
     <HomeDisplay>
+      <AccountButton onClick={accountModalHandler}>Account</AccountButton>
+      <LogoutCard showAccount={showAccount} />
       <AddEmployeeForm show={showAddModal} setShowAddModal={setShowAddModal} />
-
       <ModalOverlay
         showModal={showAddModal}
         onClick={(e) => setShowAddModal(false)}

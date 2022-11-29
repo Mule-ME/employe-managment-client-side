@@ -17,7 +17,7 @@ type CardProps = {
 };
 
 const Card = (props: CardProps) => {
-  const { name, email, _id, gender, salary, dateOfBirth } = props.employee;
+  const { name, email, gender, salary, dateOfBirth } = props?.employee;
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -56,13 +56,13 @@ const Card = (props: CardProps) => {
     <Container>
       <EditEmployeeForm
         show={showUpdateModal}
-        setShowUpdateModal={setShowDeleteModal}
-        employee={props.employee}
+        setShowUpdateModal={setShowUpdateModal}
+        employee={props?.employee}
       />
       <DeleteEmployeeForm
         show={showDeleteModal}
         setShowDeleteModal={setShowDeleteModal}
-        employee={props.employee}
+        employee={props?.employee}
       />
       <ModalOverlay
         onClick={(e) =>
@@ -80,7 +80,7 @@ const Card = (props: CardProps) => {
         <Value>{name}</Value>
         <Value>{email}</Value>
         <Value>{gender}</Value>
-        <Value>{salary}</Value>
+        <Value>{salary?.toLocaleString()}</Value>
         <Value>{dateOfBirth?.toString().substring(0, 10)}</Value>
       </ValueWrapper>
       <ActionButtonsWrapper>

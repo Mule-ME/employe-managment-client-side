@@ -23,18 +23,11 @@ const EditEmployeeForm = ({
   setShowUpdateModal,
   employee: { name, email, gender, salary, dateOfBirth, _id },
 }: EditEmployeeFormProps) => {
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   console.log("submit", e);
-  // };
-
-  const [updatedName, setName] = useState("");
-  const [updatedEmail, setEmail] = useState("");
-  const [UpdatedGender, setGender] = useState("");
-  const [UpdatedDateOfBirth, setDateOfBirth] = useState<Date | undefined>(
-    undefined
-  );
-  const [updatedSalary, setSalary] = useState<number | undefined>(undefined);
+  const [updatedName, setName] = useState(name);
+  const [updatedEmail, setEmail] = useState(email);
+  const [UpdatedGender, setGender] = useState(gender);
+  const [UpdatedDateOfBirth, setDateOfBirth] = useState(dateOfBirth);
+  const [updatedSalary, setSalary] = useState(salary);
 
   const dispatch = useDispatch();
 
@@ -105,8 +98,6 @@ const EditEmployeeForm = ({
         />
       </FormInputWrapper>
       <ActionWrapper>
-        {/* <Button actionName="Cancel" type="submit" />
-         */}
         <Button
           actionName="Cancel"
           handleClick={() => setShowUpdateModal(false)}

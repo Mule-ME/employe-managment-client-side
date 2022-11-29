@@ -50,10 +50,6 @@ const AddEmployeeForm = ({
     setGender(value);
   };
 
-  // const handleSubmit = (e:any) => {
-  //   e.preventDefault();
-  // };
-
   return (
     <FormWrapper show={show}>
       <Title>Add Employee</Title>

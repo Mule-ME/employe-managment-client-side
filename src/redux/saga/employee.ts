@@ -1,31 +1,18 @@
-import {
-  ADD_EMPLOYEE,
-  DELETE_EMPLOYEE,
-  UPDATE_EMPLOYEE,
-} from "../actionType/employee";
+import axios from "axios";
+import { baseUrl, headers } from "../../utils";
 import {
   deletedEmployee,
   employeeAdded,
   updatedEmployee,
+  gotEmployee,
 } from "../action/employee";
 import {
   AddEmployeeResponse,
   DeleteEmployeeResponse,
-  Employee,
   GetEmployeeResponse,
   UpdateEmployeeResponse,
 } from "../../types/index";
-
 import { put } from "@redux-saga/core/effects";
-import axios from "axios";
-import { gotEmployee } from "../action/employee";
-
-const baseUrl = "http://localhost:5000/api/v1";
-
-const headers = {
-  accept: "Application/json",
-  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-};
 
 export function* getEmployees(GetEmployeePayload: any) {
   const query = {
@@ -47,7 +34,6 @@ export function* getEmployees(GetEmployeePayload: any) {
       }
     );
     yield put(gotEmployee(data));
-    console.log(data, "this is the response");
   } catch (e) {
     yield put(gotEmployee({ success: false }));
   }
@@ -55,7 +41,7 @@ export function* getEmployees(GetEmployeePayload: any) {
 export function* addEmployee({ employee }: any) {
   try {
     const { data } = yield axios.post<AddEmployeeResponse>(
-      `${baseUrl}/employee/create`,
+      `${baseUrl}/employee`,
       employee,
       {
         method: "POST",
@@ -73,23 +59,24 @@ export function* addEmployee({ employee }: any) {
 export function* updateEmployee({ employee }: any) {
   try {
     const { data } = yield axios.patch<UpdateEmployeeResponse>(
-      `${baseUrl}/employee/update/${employee._id}`,
+      `${baseUrl}/employee/${employee._id}`,
+      employee,
       {
         method: "PATCH",
         headers,
       }
     );
     yield put(updatedEmployee(data));
+    console.log(data, "headers", employee);
   } catch (e) {
     yield put(updatedEmployee({ success: false }));
-    console.log(headers, "headers");
   }
 }
 
 export function* deleteEmployee({ employee }: any) {
   try {
     yield axios.delete<DeleteEmployeeResponse>(
-      `${baseUrl}/employee/delete/${employee._id}}`,
+      `${baseUrl}/employee/${employee._id}}`,
       {
         method: "DELETE",
         headers,
