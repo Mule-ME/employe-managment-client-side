@@ -10,7 +10,7 @@ const CardContainer = (props: CardContainerProps) => {
   return (
     <ListContainer>
       {props.employees?.map((employee) => (
-        <Card employee={employee} />
+        <Card key={employee?._id} employee={employee} />
       ))}
     </ListContainer>
   );
