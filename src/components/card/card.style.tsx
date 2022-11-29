@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: #ffffff;
   display: flex;
-  position: relative;
+  // position: relative;
   align-items: center;
   justify-content: flex-start;
   padding-left: 1rem;
@@ -40,10 +40,9 @@ export const ValueWrapper = styled.div`
 `;
 export const ActionButtonsWrapper = styled.div`
   display: flex;
+  justify-content: flex-end;
   position: absolute;
   gap: 0.3rem;
   padding-top: 7rem;
-  margin-right: 0.5rem;
-  left: 75%;
-  width: 10%;
+  width: 24%;
 `;

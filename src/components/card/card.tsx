@@ -65,7 +65,7 @@ const Card = (props: CardProps) => {
         employee={props?.employee}
       />
       <ModalOverlay
-        onClick={(e) =>
+        onClick={() =>
           showDeleteModal === true
             ? setShowDeleteModal(false)
             : setShowUpdateModal(false)

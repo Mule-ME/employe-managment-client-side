@@ -54,6 +54,7 @@ export const ModalOverlay = styled.div<{
   backdrop-filter: blur(2px);
   z-index: 5;
 `;
+
 export const AccountButton = styled.button`
   position: absolute;
   top: 1%;
