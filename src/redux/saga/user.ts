@@ -2,13 +2,7 @@ import { put } from "@redux-saga/core/effects";
 import axios from "axios";
 import { LoginResponse, LoginPayload } from "../../types";
 import { userLogged } from "../action/user";
-
-const baseUrl = "http://localhost:5000/api/v1";
-
-const headers = {
-  accept: "Application/json",
-  "Content-Type": "application/json",
-};
+import { baseUrl, headers } from "../../utils";
 
 export function* loginUser({ email, password }: LoginPayload) {
   try {

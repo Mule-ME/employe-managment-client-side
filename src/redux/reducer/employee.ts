@@ -58,6 +58,8 @@ export function employeeReducer(
     case ADD_EMPLOYEE:
       return { ...state, addingEmployee: true };
     case EMPLOYEE_ADDED:
+      console.log(action.payload.success, "action.payload.success");
+
       if (action.payload.success)
         return {
           ...state,
