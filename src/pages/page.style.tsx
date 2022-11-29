@@ -27,7 +27,7 @@ export const HomeDisplay = styled.div`
 export const ActionsWrapper = styled.div`
   display: flex;
   gap: 1rem;
-  margin: 0 0 1rem 53.5rem;
+  margin: 0 0 1rem 50.6rem;
 `;
 
 export const PaginationContainer = styled.div`
@@ -57,7 +57,7 @@ export const ModalOverlay = styled.div<{
 export const AccountButton = styled.button`
   position: absolute;
   top: 1%;
-  left: 86.3%;
+  left: 84.6%;
   justify-content: flex-end;
   display: flex;
   justify-content: center;

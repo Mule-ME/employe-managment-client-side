@@ -5,11 +5,11 @@ export const LogoutCardContainer = styled.div<{ showAccount: boolean }>`
   flex-direction: column;
   background-color: #fff;
   width: 11rem;
-  height: 7rem;
+  height: 5.9rem;
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 5%;
-  left: 81.6%;
+  left: 79.9%;
   border-radius: 0.5rem;
 `;
 
