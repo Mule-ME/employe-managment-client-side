@@ -41,7 +41,7 @@ const AddEmployeeForm = ({
           setDateOfBirth(new Date(Date.parse(value)));
           break;
         case "salary":
-          setSalary(parseInt(value, 10));
+          setSalary(parseInt(value));
           break;
       }
     };
