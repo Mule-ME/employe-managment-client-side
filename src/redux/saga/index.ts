@@ -15,10 +15,9 @@ import { loginUser } from "./user";
 import { LOGIN_USER } from "../actionType/user";
 
 export function* rootSaga() {
-  const takeLeading: any = Effects.takeLeading;
   const takeLatest: any = Effects.takeLatest;
 
-  yield takeLeading(GET_EMPLOYEES, getEmployees);
+  yield takeLatest(GET_EMPLOYEES, getEmployees);
   yield takeLatest(ADD_EMPLOYEE, addEmployee);
   yield takeLatest(UPDATE_EMPLOYEE, updateEmployee);
   yield takeLatest(DELETE_EMPLOYEE, deleteEmployee);

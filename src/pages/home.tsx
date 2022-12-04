@@ -38,6 +38,7 @@ const Home = () => {
     }
   };
 
+  console.log(employee,"total employees")
   //Requesting users list with out search
   const dispatch = useDispatch();
   useEffect(() => {
