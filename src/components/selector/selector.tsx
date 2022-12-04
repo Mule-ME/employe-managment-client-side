@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { Select } from "./selector.style";
+
 type SelectProps = {
   placeholder: string;
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;

@@ -1,10 +1,10 @@
+import * as Effects from "redux-saga/effects";
 import {
+  GET_EMPLOYEES,
   ADD_EMPLOYEE,
   DELETE_EMPLOYEE,
   UPDATE_EMPLOYEE,
 } from "../actionType/employee";
-import * as Effects from "redux-saga/effects";
-import { GET_EMPLOYEES } from "../actionType/employee";
 import {
   addEmployee,
   deleteEmployee,
