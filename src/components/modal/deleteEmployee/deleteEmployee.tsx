@@ -2,7 +2,7 @@ import { ActionWrapper, FormWrapper, Title } from "../modals.style";
 import Button from "../../button/button";
 import { Employee } from "../../../types";
 import { useDispatch } from "react-redux";
-import { deleteEmployee } from "../../../redux/action/employee";
+import { deleteEmployee } from "../../../redux/action/addEmployee";
 
 type DeleteEmployeeFormProps = {
   show: boolean;

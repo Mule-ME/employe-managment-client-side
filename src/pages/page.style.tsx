@@ -24,12 +24,13 @@ export const HomeDisplay = styled.div`
   align-items: center;
   margin: 5rem 0;
 `;
+
 export const ActionsWrapper = styled.div`
   display: flex;
   gap: 1rem;
   margin: 0 0 1rem 50.6rem;
 `;
-
+-
 export const PaginationContainer = styled.div`
   position: absolute;
   top: 80%;

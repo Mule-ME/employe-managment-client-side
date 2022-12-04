@@ -1,6 +1,6 @@
 import { useEffect, useState, ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getEmployees } from "../redux/action/employee";
+import { getEmployees } from "../redux/action/addEmployee";
 import { employeeListSelector } from "../redux/selector/employee";
 import {
   ActionsWrapper,
@@ -38,7 +38,7 @@ const Home = () => {
     }
   };
 
-  console.log(employee,"total employees")
+  console.log(employee, "total employees");
   //Requesting users list with out search
   const dispatch = useDispatch();
   useEffect(() => {

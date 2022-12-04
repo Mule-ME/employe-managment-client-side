@@ -9,7 +9,7 @@ import FormInput from "../../formInput/formInput";
 import Selector from "../../selector/selector";
 import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addEmployee } from "../../../redux/action/employee";
+import { addEmployee } from "../../../redux/action/addEmployee";
 
 type AddEmployeeFormProps = {
   show: boolean;

@@ -10,7 +10,7 @@ import Selector from "../../selector/selector";
 import { Employee } from "../../../types";
 import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateEmployee } from "../../../redux/action/employee";
+import { updateEmployee } from "../../../redux/action/addEmployee";
 
 type EditEmployeeFormProps = {
   show: boolean;
