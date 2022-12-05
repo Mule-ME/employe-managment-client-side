@@ -1,5 +1,4 @@
-export const baseUrl =
-  "https://employee-mangtt-server-side.herokuapp.com/api/v1";
+export const baseUrl = "https://tame-teal-moth-tie.cyclic.app/api/v1";
 export const headers = {
   accept: "Application/json",
   Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
