@@ -5,7 +5,7 @@ import {
   employeeAdded,
   updatedEmployee,
   gotEmployee,
-} from "../action/addEmployee";
+} from "../action/employee";
 import {
   AddEmployeeResponse,
   DeleteEmployeeResponse,
